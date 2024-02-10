@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 const SignUp = () => {
   // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
@@ -17,6 +18,7 @@ const SignUp = () => {
     try {
       setLoading(true);
       setError(false);
+
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -25,13 +27,15 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      // console.log(data);
+      console.log(data);
       setLoading(false);
+
       if (data.success === false) {
         setError(true);
+
         return;
       }
-      navigate("/signin");
+      navigate("/sign-in");
     } catch (error) {
       setLoading(false);
       setError(true);
